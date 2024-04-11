@@ -5,11 +5,14 @@ import com.l2c.business.entity.User;
 import com.l2c.business.exception.ResourceNotFoundException;
 import com.l2c.business.repository.UserRepository;
 import com.l2c.business.service.UserService;
+import com.l2c.business.validation_group.ValidationGroups;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 @Service
+@Validated
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -25,19 +28,6 @@ public class UserServiceImpl implements UserService {
 
         UserDto userResponse = mapToDto(newUser);
         return userResponse;
-
-
-//        User newUser = new User();
-//        newUser.setFirstName(userDto.getFirstName());
-//        newUser.setSecondName(userDto.getSecondName());
-//        newUser.setUsername(userDto.getUsername());
-//        newUser.setEmail(userDto.getEmail());
-//        newUser.setPhoneNumber(userDto.getPhoneNumber());
-//        newUser.setCity(userDto.getCity());
-//        newUser.setPassword(userDto.getPassword());
-//
-//        userRepository.save(newUser);
-//        return newUser;
     }
 
     @Override
@@ -54,20 +44,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(User user, long id) {
-        User updateUser = userRepository.findById(id)
+    public UserDto updateUser(UserDto userDto, long id) {
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
 
-        updateUser.setFirstName(user.getFirstName());
-        updateUser.setSecondName(user.getSecondName());
-        updateUser.setUsername(user.getUsername());
-        updateUser.setEmail(user.getEmail());
-        updateUser.setPhoneNumber(user.getPhoneNumber());
-        updateUser.setCity(user.getCity());
-        updateUser.setPassword(user.getPassword());
+        user.setUsername(userDto.getUsername());
+        user.setPhoneNumber(userDto.getPhoneNumber());
+        user.setCity(userDto.getCity());
+        user.setPassword(userDto.getPassword());
 
-        User updatedUser = userRepository.save(updateUser);
-        return updatedUser;
+        User updatedUser = userRepository.save(user);
+        return mapToDto(updatedUser);
     }
 
     private User mapToEntity(UserDto userDto) {
