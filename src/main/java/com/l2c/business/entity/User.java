@@ -1,6 +1,9 @@
 package com.l2c.business.entity;
 
+import com.l2c.business.validation_group.ValidationGroups;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,24 +23,30 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @NotNull(groups = ValidationGroups.Update.class)
     private String firstName;
 
-    @Column(nullable = false)
+    @NotNull(groups = ValidationGroups.Create.class)
     private String secondName;
 
-    @Column(nullable = false, unique = true)
+    @NotNull(groups = ValidationGroups.Update.class)
+    @Column(unique = true)
     private String username;
 
-    @Column(nullable = false, unique = true)
+    @NotNull(groups = ValidationGroups.Create.class)
+    @Column(unique = true)
+    @Email
     private String email;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
+    @NotNull(groups = ValidationGroups.Update.class)
     private String phoneNumber;
 
+    @NotNull(groups = ValidationGroups.Update.class)
     private String city;
 
-    @Column(nullable = false)
+    //    @NotBlank(groups = BasicUserInfo.class)
+    @NotNull(groups = ValidationGroups.Update.class)
     private String password;
     // TODO: add two fields of password and check them
 

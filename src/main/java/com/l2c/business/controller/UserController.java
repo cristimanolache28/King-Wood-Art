@@ -3,21 +3,24 @@ package com.l2c.business.controller;
 import com.l2c.business.dto.UserDto;
 import com.l2c.business.entity.User;
 import com.l2c.business.service.UserService;
+import com.l2c.business.validation_group.ValidationGroups;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 @RequestMapping("/api/v1/users")
+@Validated
 public class UserController {
 
     @Autowired
     private UserService userService;
 
     @PostMapping("/create")
-    public ResponseEntity<UserDto> createUserAccount(@RequestBody UserDto userDto) {
+    public ResponseEntity<UserDto> createUserAccount(@RequestBody @Validated(ValidationGroups.Create.class) UserDto userDto) {
         return new ResponseEntity<>(userService.createUser(userDto), HttpStatus.CREATED);
     }
 
@@ -34,8 +37,9 @@ public class UserController {
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable(name = "id") long id) {
-        User userUpdated = userService.updateUser(user, id);
+    public ResponseEntity<UserDto> updateUser(@RequestBody @Validated(ValidationGroups.Update.class) UserDto userDto,
+                                              @PathVariable(name = "id") long id) {
+        UserDto userUpdated = userService.updateUser(userDto, id);
         return new ResponseEntity<>(userUpdated, HttpStatus.OK);
     }
 }
