@@ -8,4 +8,6 @@ public interface ResinTableService {
     ResinTableDto getResinTableById(Integer id);
 
     void deleteResinTableById(Integer id);
+
+    ResinTableDto updateTable(ResinTableDto resinTableDto, Integer id);
 }

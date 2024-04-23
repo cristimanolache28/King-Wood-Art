@@ -45,7 +45,6 @@ public class User {
     @NotNull(groups = ValidationGroups.Update.class)
     private String city;
 
-    //    @NotBlank(groups = BasicUserInfo.class)
     @NotNull(groups = ValidationGroups.Update.class)
     private String password;
     // TODO: add two fields of password and check them
