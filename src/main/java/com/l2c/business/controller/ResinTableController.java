@@ -30,4 +30,10 @@ public class ResinTableController {
         return new ResponseEntity<>("The table was deleted with successfully!", HttpStatus.OK);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ResinTableDto> updateTable(@PathVariable(name = "id") Integer id, @RequestBody ResinTableDto tableDto) {
+        ResinTableDto updateTableDto = tableService.updateTable(tableDto, id);
+        return new ResponseEntity<>(updateTableDto, HttpStatus.OK);
+    }
+
 }

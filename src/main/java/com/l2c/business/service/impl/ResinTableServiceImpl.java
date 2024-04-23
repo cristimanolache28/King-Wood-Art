@@ -46,6 +46,27 @@ public class ResinTableServiceImpl implements ResinTableService {
         tableRepository.delete(resinTable);
     }
 
+    @Override
+    public ResinTableDto updateTable(ResinTableDto tableDto, Integer id) {
+        ResinTable table = tableRepository.findById(id)
+                        .orElseThrow(() -> new ResourceNotFoundException("Table", "id", id));
+
+        table.setName(tableDto.getName());
+        table.setDescription(tableDto.getDescription());
+        table.setPrice(tableDto.getPrice());
+        table.setLength(tableDto.getLength());
+        table.setWidth(tableDto.getWidth());
+        table.setThickness(tableDto.getThickness());
+        table.setWidth(tableDto.getWeight());
+        table.setQuantity(tableDto.getQuantity());
+        table.setTableSize(tableDto.getTableSize());
+        table.setTableStatus(tableDto.getTableStatus());
+
+        ResinTable updatedTable = tableRepository.save(table);
+
+        return mapToDto(updatedTable);
+    }
+
     // convert dto to entity
     private ResinTable mapToEntity(ResinTableDto resinTableDto) {
         ResinTable resinTable = modelMapper.map(resinTableDto, ResinTable.class);

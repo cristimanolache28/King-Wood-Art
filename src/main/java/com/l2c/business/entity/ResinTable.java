@@ -19,37 +19,37 @@ public class ResinTable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull(groups = ValidationGroups.Update.class)
+    @NotNull(groups = {ValidationGroups.Create.class, ValidationGroups.Update.class})
     @Size(min = 3, message = "The table name should have at least three characters.")
     private String name;
 
-    @NotNull(groups = ValidationGroups.Update.class)
+    @NotNull(groups = {ValidationGroups.Create.class, ValidationGroups.Update.class})
     @Size(min = 15, message = "Table description should have at least four characters.")
     private String description;
 
-    @NotNull(groups = ValidationGroups.Update.class)
+    @NotNull(groups = {ValidationGroups.Create.class, ValidationGroups.Update.class})
     private Double price;
 
-    @NotNull
+    @NotNull(groups = {ValidationGroups.Create.class, ValidationGroups.Update.class})
     private int length;
 
-    @NotNull
+    @NotNull(groups = {ValidationGroups.Create.class, ValidationGroups.Update.class})
     private int width;
 
-    @NotNull
+    @NotNull(groups = {ValidationGroups.Create.class, ValidationGroups.Update.class})
     private int thickness;
 
-    @NotNull
+    @NotNull(groups = {ValidationGroups.Create.class, ValidationGroups.Update.class})
     private int weight;
 
-    @NotNull
+    @NotNull(groups = {ValidationGroups.Create.class, ValidationGroups.Update.class})
     private int quantity;
 
-    @NotNull
+    @NotNull(groups = {ValidationGroups.Create.class, ValidationGroups.Update.class})
     @Enumerated(EnumType.STRING)
     TableSize tableSize;
 
-    @NotNull
+    @NotNull(groups = {ValidationGroups.Create.class, ValidationGroups.Update.class})
     @Enumerated(EnumType.STRING)
     TableStatus tableStatus;
 
