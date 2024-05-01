@@ -6,8 +6,8 @@ import com.l2c.business.utils.TableStatus;
 import lombok.Data;
 
 @Data
-public class ResinTableDto {
-//    private Integer id;
+public class ProductDto {
+    private Integer id;
     private String name;
     private String description;
     private Double price;
