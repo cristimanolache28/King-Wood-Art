@@ -3,7 +3,6 @@ package com.l2c.business.user;
 import com.l2c.business.entity.User;
 import com.l2c.business.repository.UserRepository;
 import com.l2c.business.service.UserService;
-import jakarta.transaction.TransactionScoped;
 import jakarta.transaction.Transactional;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -34,7 +33,7 @@ class UserTest {
         User user = new User();
         user.setId(1L);
         user.setFirstName("firstname");
-        user.setSecondName("secondname");
+        user.setLastName("secondname");
         user.setUsername("username");
         user.setEmail("user@yahoo.com");
         user.setPhoneNumber("07112345678");
